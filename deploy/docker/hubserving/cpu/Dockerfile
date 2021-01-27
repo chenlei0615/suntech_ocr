@@ -8,9 +8,10 @@ RUN python3.7 -m pip install paddlepaddle==1.7.2 -i https://pypi.tuna.tsinghua.e
 
 RUN pip3.7 install paddlehub --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-RUN git clone https://gitee.com/paddlepaddle/PaddleOCR.git /PaddleOCR
+#RUN git clone https://gitee.com/paddlepaddle/PaddleOCR.git /PaddleOCR
+RUN cd /home && git clone -b develop --depth 1 https://github.com/PaddlePaddle/PaddleOCR.git
 
-WORKDIR /PaddleOCR
+WORKDIR /home/PaddleOCR
 
 RUN pip3.7 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
@@ -29,4 +30,4 @@ RUN tar xf /PaddleOCR/inference/ch_ppocr_mobile_v1.1_rec_infer.tar -C /PaddleOCR
 
 EXPOSE 8866
 
-CMD ["/bin/bash","-c","hub install deploy/hubserving/ocr_system/ && hub serving start -m ocr_system"]
+CMD ["/bin/bash","-c","hub install deploy/hubserving/suntech_ocr/ && hub serving start -m suntech_ocr"]
